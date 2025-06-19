@@ -1,0 +1,59 @@
+{
+    "Changes": {
+        "cover": "covers/c.jpg",
+        "year": 2022,
+        "songs": [
+            "Change",
+            "Hate Dancin",
+            "Astroturf",
+            "No Body",
+            "Gondii",
+            "Exploding Suns",
+            "Short Change"
+        ]
+    },
+    "The Silver Cord": {
+        "cover": "covers/tsc.jpg",
+        "year": 2023,
+        "songs": [
+            "Theia",
+            "The Silver Cord",
+            "Set",
+            "Chang'e",
+            "Gilgamesh",
+            "Swan Song",
+            "Extinction"
+        ]
+    },
+    "Flight b741": {
+        "cover": "covers/fb741.jpg",
+        "year": 2024,
+        "songs": [
+            "Mirage City",
+            "Antarctica",
+            "Raw Feel",
+            "Field of Vision",
+            "Hog Calling Contest",
+            "Le Risque",
+            "Flight b741",
+            "Sad Pilot",
+            "Rats in the Sky",
+            "Daily Blues"
+        ]
+    },
+    "Infest the Rats' Nest": {
+        "cover": "covers/itrn.jpg",
+        "year": 2019,
+        "songs": [
+            "Planet B",
+            "Mars for the Rich",
+            "Organ Farmer",
+            "Superbug",
+            "Venusian 1",
+            "Perihelion",
+            "Venusian 2",
+            "Self-Immolate",
+            "Hell"
+        ]
+    }
+}
