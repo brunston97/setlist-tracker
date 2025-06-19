@@ -4,7 +4,7 @@ const AlbumCard = ({ title, data }) => {
     console.log('AlbumCard props:', { title, data });
     return (
         <div>
-            <Card>
+            <Card isPressable>
                 <CardHeader>
                     <h3>{title}</h3>
                 </CardHeader>
