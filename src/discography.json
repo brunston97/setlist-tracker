@@ -1,6 +1,6 @@
 {
     "Changes": {
-        "cover": "covers/c.jpg",
+        "cover": "./c.jpeg",
         "year": 2022,
         "songs": [
             "Change",
@@ -13,7 +13,7 @@
         ]
     },
     "The Silver Cord": {
-        "cover": "covers/tsc.jpg",
+        "cover": "./tsc.jpg",
         "year": 2023,
         "songs": [
             "Theia",
@@ -26,7 +26,7 @@
         ]
     },
     "Flight b741": {
-        "cover": "covers/fb741.jpg",
+        "cover": "./fb741.jpg",
         "year": 2024,
         "songs": [
             "Mirage City",
@@ -42,7 +42,7 @@
         ]
     },
     "Infest the Rats' Nest": {
-        "cover": "covers/itrn.jpg",
+        "cover": "./itrn.jpeg",
         "year": 2019,
         "songs": [
             "Planet B",

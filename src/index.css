@@ -27,6 +27,7 @@ a:hover {
 }
 
 body {
+  @apply bg-zinc-400;
   margin: 0;
   display: flex;
   place-items: center;
