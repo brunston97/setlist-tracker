@@ -4,7 +4,7 @@ import AlbumCard from './AlbumCard'
 import './App.css'
 
 function App() {
-  //const [counts, setCounts] = useState({})
+  const [counts, setCounts] = useState({})
 
   useEffect(() => {
     console.log("Loaded album data:", discographyData);
@@ -16,7 +16,7 @@ function App() {
       }
     }
     
-    //setCounts(initialCounts);
+    setCounts(initialCounts);
   }, []);
 
   return (
@@ -27,6 +27,7 @@ function App() {
             key={albumName}
             title={albumName}
             data={album}
+            counts={counts}
           />
         ))}
       </div>
