@@ -1,6 +1,7 @@
-import { Card, CardBody, CardHeader, CardProps, Image } from '@nextui-org/react'
+import { Card, CardBody, CardHeader, Image } from '@nextui-org/react'
 
-const AlbumCard = (title) => {
+const AlbumCard = ({ title, data }) => {
+    console.log('AlbumCard props:', { title, data });
     return (
         <div>
             <Card>
@@ -8,7 +9,11 @@ const AlbumCard = (title) => {
                     <h3>{title}</h3>
                 </CardHeader>
                 <CardBody>
-                    <h4>tbd</h4>
+                        {data.songs?.map((song) => (
+                            <div key={song}>
+                                {song}
+                            </div>
+                        ))}
                 </CardBody>
             </Card>
         </div>
