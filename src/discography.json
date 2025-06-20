@@ -1,30 +1,4 @@
 {
-    "Changes": {
-        "cover": "./c.jpeg",
-        "year": 2022,
-        "songs": [
-            "Change",
-            "Hate Dancin",
-            "Astroturf",
-            "No Body",
-            "Gondii",
-            "Exploding Suns",
-            "Short Change"
-        ]
-    },
-    "The Silver Cord": {
-        "cover": "./tsc.jpg",
-        "year": 2023,
-        "songs": [
-            "Theia",
-            "The Silver Cord",
-            "Set",
-            "Chang'e",
-            "Gilgamesh",
-            "Swan Song",
-            "Extinction"
-        ]
-    },
     "Flight b741": {
         "cover": "./fb741.jpg",
         "year": 2024,
@@ -41,6 +15,32 @@
             "Daily Blues"
         ]
     },
+    "The Silver Cord": {
+        "cover": "./tsc.jpg",
+        "year": 2023,
+        "songs": [
+            "Theia",
+            "The Silver Cord",
+            "Set",
+            "Chang'e",
+            "Gilgamesh",
+            "Swan Song",
+            "Extinction"
+        ]
+    },
+    "Changes": {
+        "cover": "./c.jpeg",
+        "year": 2022,
+        "songs": [
+            "Change",
+            "Hate Dancin",
+            "Astroturf",
+            "No Body",
+            "Gondii",
+            "Exploding Suns",
+            "Short Change"
+        ]
+    },
     "Infest the Rats' Nest": {
         "cover": "./itrn.jpeg",
         "year": 2019,
@@ -54,6 +54,52 @@
             "Venusian 2",
             "Self-Immolate",
             "Hell"
+        ]
+    },
+    "Flying Microtonal Banana": {
+        "cover": "./fmb.jpeg",
+        "year": 2017,
+        "songs": [
+            "Rattlesnake",
+            "Melting",
+            "Open Water",
+            "Sleep Drifter",
+            "Billabong Valley",
+            "Anoxia",
+            "Doom City",
+            "Nuclear Fusion",
+            "Flying Microtonal Banana"
+        ]
+    },
+    "Nonagon Infinity": {
+        "cover": "./ni.jpeg",
+        "year": 2016,
+        "songs": [
+            "Robot Stop",
+            "Big Fig Wasp",
+            "Gamma Knife",
+            "People-Vultures",
+            "Mr. Beat",
+            "Evil Death Roll",
+            "Invisible Face",
+            "Wah Wah",
+            "Road Train"
+        ]
+    },
+    "I'm in Your Mind Fuzz": {
+        "cover": "./iiymf.jpeg",
+        "year": 2014,
+        "songs": [
+            "I'm in Your Mind",
+            "I'm Not in Your Mind",
+            "Cellophane",
+            "I'm in Your Mind Fuzz",
+            "Empty",
+            "Hot Water",
+            "Am I in Heaven?",
+            "Slow Jam 1",
+            "Satan Speeds Up",
+            "Her and I (Slow Jam 2)"
         ]
     }
 }
