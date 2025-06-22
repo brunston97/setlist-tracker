@@ -28,6 +28,19 @@
             "Extinction"
         ]
     },
+    "PetroDragonic Apocalypse": {
+        "cover": "./pda.jpg",
+        "year": 2023,
+        "songs": [
+            "Motor Spirit",
+            "Supercell",
+            "Converge",
+            "Witchcraft",
+            "Gila Monster",
+            "Dragon",
+            "Flamethrower"
+        ]
+    },
     "Changes": {
         "cover": "./c.jpeg",
         "year": 2022,
@@ -39,6 +52,96 @@
             "Gondii",
             "Exploding Suns",
             "Short Change"
+        ]
+    },
+    "Laminated Denim": {
+        "cover": "./ld.jpeg",
+        "year": 2022,
+        "songs": [
+            "The Land Before Timeland",
+            "Hypertension"
+        ]
+    },
+    "Ice, Death, Planets, Lungs, Mushrooms and Lava": {
+        "cover": "./idplml.jpeg",
+        "year": 2022,
+        "songs": [
+            "Mycelium",
+            "Ice V",
+            "Magma",
+            "Lava",
+            "Hell's Itch",
+            "Iron Lung",
+            "Gliese 710"
+        ]
+    },
+    "Omnium Gatherum": {
+        "cover": "og.jpeg",
+        "year": 2022,
+        "songs": [
+            "The Dripping Tap",
+            "Magenta Mountain",
+            "Kepler-22b",
+            "Gaia",
+            "Ambergris",
+            "Sadie Sorceress",
+            "Evilest Man",
+            "The Garden Goblin",
+            "Blame It On The Weather",
+            "Persistence",
+            "The Grim Reaper",
+            "Presumptuous",
+            "Predator X",
+            "Red Smoke",
+            "Candles",
+            "The Funeral"
+        ]
+    },
+    "Butterfly 3000": {
+        "cover": "./b3000.jpeg",
+        "year": 2021,
+        "songs": [
+            "Yours",
+            "Shanghai",
+            "Dreams",
+            "Blue Morpho",
+            "Interior People",
+            "Catching Smoke",
+            "2.02 Killer Year",
+            "Black Hot Soup",
+            "Ya Love",
+            "Butterfly 3000"
+        ]
+    },
+    "L.W.": {
+        "cover": "./lw.jpeg",
+        "year": 2021,
+        "songs": [
+            "If Not Now, Then When?",
+            "O.N.E.",
+            "Pleura",
+            "Supreme Ascendancy",
+            "Static Electricity",
+            "East West Link",
+            "Ataraxia",
+            "See Me",
+            "K.G.L.W. (Outro)"
+        ]
+    },
+    "K.G.": {
+        "cover": "./kg.jpeg",
+        "year": 2020,
+        "songs": [
+            "K.G.L.W.",
+            "Automation",
+            "Minimum Brain Size",
+            "Straws In The Wind",
+            "Some Of Us",
+            "Ontology",
+            "Intrasport",
+            "Oddlife",
+            "Honey",
+            "The Hungry Wolf Of Fate"
         ]
     },
     "Infest the Rats' Nest": {
@@ -54,6 +157,100 @@
             "Venusian 2",
             "Self-Immolate",
             "Hell"
+        ]
+    },
+    "Fishing for Fishies": {
+        "cover": "./fff.jpeg",
+        "year": 2019,
+        "songs": [
+            "Fishing for Fishies",
+            "Boogieman Sam",
+            "The Bird Song",
+            "Plastic Boogie",
+            "The Cruel Millennial",
+            "Real's Not Real",
+            "This Thing",
+            "Acarine",
+            "Cyboogie"
+        ]
+    },
+    "Gumboot Soup": {
+        "cover": "./gs.jpeg",
+        "year": 2017,
+        "songs": [
+            "Beginner's Luck",
+            "Greenhouse Heat Death",
+            "Barefoot Desert",
+            "Muddy Water",
+            "Superposition",
+            "Down The Sink",
+            "The Great Chain Of Being",
+            "The Last Oasis",
+            "All Is Known",
+            "I'm Sleepin' In",
+            "The Wheel"
+        ]
+    },
+    "Polygondwanaland": {
+        "cover": "./p.jpeg",
+        "year": 2017,
+        "songs": [
+            "Crumbling Castle",
+            "Polygondwanaland",
+            "The Castle In The Air",
+            "Deserted Dunes Welcome Weary Feet",
+            "Inner Cell",
+            "Loyalty",
+            "Horology",
+            "Tetrachromacy",
+            "Searching...",
+            "The Fourth Colour"
+        ]
+    },
+    "Sketches of Brunswick East": {
+        "cover": "./sobe.jpeg",
+        "year": 2017,
+        "songs": [
+            "Sketches of Brunswick East I",
+            "Countdown",
+            "D-Day",
+            "Tezeta",
+            "Cranes, Planes, Migraines",
+            "The Spider and Me",
+            "Sketches of Brunswick East II",
+            "Dusk to Dawn on Lygon Street",
+            "The Book",
+            "The Journey to (S)Hell",
+            "Rolling Stoned",
+            "You Can Be Your Silhouette",
+            "Sketches of Brunswick East III"
+        ]
+    },
+    "Murder of the Universe": {
+        "cover": "motu.jpeg",
+        "year": 2017,
+        "songs": [
+            "A New World",
+            "Altered Beast I",
+            "Alter Me I",
+            "Altered Beast II",
+            "Alter Me II",
+            "Altered Beast III",
+            "Alter Me III",
+            "Altered Beast IV",
+            "Life / Death",
+            "Some Context",
+            "The Reticent Raconteur",
+            "The Lord Of Lightning",
+            "The Balrog",
+            "The Floating Fire",
+            "The Acrid Corpse",
+            "Welcome To An Altered Future",
+            "Digital Black",
+            "Han-Tyumi, The Confused Cyborg",
+            "Soy-Protein Munt Machine",
+            "Vomit Coffin",
+            "Murder Of The Universe"
         ]
     },
     "Flying Microtonal Banana": {
@@ -86,6 +283,34 @@
             "Road Train"
         ]
     },
+    "Paper Mâché Dream Balloon": {
+        "cover": "./pmdb.jpeg",
+        "year": 2015,
+        "songs": [
+            "Sense",
+            "Bone",
+            "Dirt",
+            "Paper Mâché Dream Balloon",
+            "Trapdoor",
+            "Cold Cadaver",
+            "The Bitter Boogie",
+            "N.G.R.I (Bloodstain)",
+            "Time = Fate",
+            "Time = $$$",
+            "Most Of What I Like",
+            "Paper Mâché"
+        ]
+    },
+    "Quarters!": {
+        "cover": "./q.jpeg",
+        "year": 2014,
+        "songs": [
+            "The River",
+            "Infinite Rise",
+            "God Is In The Rhythm",
+            "Lonely Steel Sheet Flyer"
+        ]
+    },
     "I'm in Your Mind Fuzz": {
         "cover": "./iiymf.jpeg",
         "year": 2014,
@@ -100,6 +325,73 @@
             "Slow Jam 1",
             "Satan Speeds Up",
             "Her and I (Slow Jam 2)"
+        ]
+    },
+    "Oddments": {
+        "cover": "./o.jpeg",
+        "year": 2014,
+        "songs": [
+            "Alluda Majaka",
+            "Stressin'",
+            "Vegemite",
+            "It's Got Old",
+            "Work This Time",
+            "ABABCD",
+            "Sleepwalker",
+            "Hot Wax",
+            "Crying",
+            "Pipe-Dream",
+            "Homeless Man In Adidas",
+            "Oddments"
+        ]
+    },
+    "Float Along - Fill Your Lungs": {
+        "cover": "./fafyl.jpeg",
+        "year": 2013,
+        "songs": [
+            "Head On/Pill",
+            "I'm Not A Man Unless I Have A Woman",
+            "God Is Calling Me Back Home",
+            "30 Past 7",
+            "Work This Time",
+            "Let Me Mend The Past",
+            "Mystery Jack",
+            "Pop In My Step",
+            "Float Along - Fill Your Lungs"
+        ]
+    },
+    "Eyes Like the Sky": {
+        "cover": "./elts.jpeg",
+        "year": 2013,
+        "songs": [
+            "Eyes Like The Sky",
+            "Year Of Our Lord",
+            "The Raid",
+            "Drum Run",
+            "Evil Man",
+            "Fort Whipple",
+            "The God Mans Goat Lust",
+            "The Killing Ground",
+            "Dust In The Wind",
+            "Guns & Horses"
+        ]
+    },
+    "12 Bar Bruise": {
+        "cover": "./12bb.jpeg",
+        "year": 2012,
+        "songs": [
+            "Elbow",
+            "Muckraker",
+            "Nein",
+            "12 Bar Bruise",
+            "Garage Liddiard",
+            "Sam Cherry's Last Shot",
+            "High Hopes Low",
+            "Cut Throat Boogie",
+            "Bloody Ripper",
+            "Uh Oh, I Called Mum",
+            "Sea Of Trees",
+            "Footy Footy"
         ]
     }
 }
