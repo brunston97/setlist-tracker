@@ -1,7 +1,6 @@
-import { Card, CardBody, CardHeader, Image } from '@nextui-org/react'
+import { Card, CardBody, CardHeader } from '@nextui-org/react'
 
 const AlbumCard = ({ title, data, counts }) => {
-    console.log('AlbumCard props:', { title, data });
     return (
         <Card className="flex flex-col bg-zinc-500 p-5 " style={{ borderRadius: '1rem' }}>
             <CardHeader className="mb-4">

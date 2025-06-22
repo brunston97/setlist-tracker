@@ -1,11 +1,14 @@
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import discographyData from './discography.json'
 import AlbumCard from './AlbumCard'
 import './App.css'
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 function App() {
   const [inputValue, setInputValue] = useState('');
-  const [counts, setCounts] = useState({})
+  const [counts, setCounts] = useState({});
 
   useEffect(() => {
     console.log("Loaded album data:", discographyData);
@@ -19,6 +22,36 @@ function App() {
     
     setCounts(initialCounts);
   }, []);
+
+  async function handleButtonClick() {
+    const urls = inputValue
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line.includes('setlist.fm'));
+    
+    const setlistIds = getSetlistIdsFromUrls(urls);
+    
+    try {
+      const response = await axios.post(`${apiUrl}/api/getSetlistsByIds`, { setlistIds });
+      setCounts(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function getSetlistIdsFromUrls(urls) {
+    const setlistIds = [];
+
+    for (const url of urls) {
+      const splitUrl = url.split('-');
+      const setlistIdAndHTML = splitUrl[splitUrl.length - 1];
+      const setlistId = setlistIdAndHTML.substring(0, setlistIdAndHTML.length-5);
+
+      setlistIds.push(setlistId);
+    }
+
+    return setlistIds;
+  }
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
@@ -34,8 +67,8 @@ function App() {
           className="w-full h-32 p-3 border rounded-lg resize-y mb-4"
         />
         <button 
-          onClick={() => {}} 
-          classname="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" 
+          onClick={() => handleButtonClick()} 
+          className="px-4 py-2 bg-blue-400 text-white rounded hover:bg-blue-700" 
         >
           Load Setlists
         </button>
