@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <div className="mb-6">
+      <div className="mb-6 flex flex-col items-center">
         <label htmlFor="setlistInput" className="block text-2xl font-medium mb-4">
           Paste Setlist.fm links here:
         </label>
@@ -65,15 +65,16 @@ function App() {
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="One link per line..."
           className="w-full h-32 p-3 border rounded-lg resize-y mb-4"
+          style={{ maxWidth: '1280px' }}
         />
         <button 
           onClick={() => handleButtonClick()} 
-          className="px-4 py-2 bg-blue-400 text-white rounded hover:bg-blue-700" 
+          className="py-2 bg-blue-400 text-white rounded hover:bg-blue-700" 
         >
           Load Setlists
         </button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 gap-6 p-4">
         {Object.entries(discographyData).map(([albumName, album]) => (
           <AlbumCard 
             key={albumName}
