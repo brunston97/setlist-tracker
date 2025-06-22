@@ -25,10 +25,13 @@ app.post('/api/getSetlistsByIds', async (req, res) => {
     const { setlistIds } = req.body;
     const counts = {};
 
+    let requestCount = 1;
+
     const limit = pLimit(1);
 
     const limitedFetches = setlistIds.map(id => 
         limit(async () => {
+            console.log(requestCount++);
             try {
                 const { data: response } = await axios.get(`https://api.setlist.fm/rest/1.0/setlist/${id}`, {
                     headers: { 'x-api-key': process.env.SETLIST_API_KEY, 'Accept': 'application/json' }
@@ -36,13 +39,14 @@ app.post('/api/getSetlistsByIds', async (req, res) => {
 
                 const songs = getSongsFromApiResponse(response);
                 for (const song of songs) {
-                    counts[song] = (counts[song] || 0) + 1;
+                    const key = song.toUpperCase();
+                    counts[key] = (counts[key] || 0) + 1;
                 }
             } catch (err) {
                 console.error(`Error getting ${id}: `, err.message);
             }
 
-            await delay(500);
+            await delay(600);
         })
     );
     

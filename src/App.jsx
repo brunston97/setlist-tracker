@@ -16,7 +16,7 @@ function App() {
     const initialCounts = {};
     for (const album of Object.values(discographyData)) {
       for (const song of album.songs) {
-        initialCounts[song] = 0;
+        initialCounts[song.toUpperCase()] = 0;
       }
     }
     
