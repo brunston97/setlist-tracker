@@ -6,24 +6,33 @@ const AlbumCard = ({ title, data, counts }) => {
     const listRef = useRef(null);
     const [isScrollable, setIsScrollable] = useState(false);
     const [isAtBottom, setIsAtBottom] = useState(false);
+    const [isAtTop, setIsAtTop] = useState(true);
 
     useEffect(() => {
         const el = listRef.current;
         if (!el) return;
 
+        const checkScrollable = () => {
+            setIsScrollable(el.scrollHeight > el.clientHeight);
+        };
+        
+        const checkIfAtBottomOrTop = () => {
+            checkIfAtTop();
+            checkIfAtBottom();
+        }
+
+        const checkIfAtTop = () => {
+            setIsAtTop(el.scrollTop === 0);
+        }
         const checkIfAtBottom = () => {
             setIsAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 1);
         };
-
-        const checkScrollable = () => {
-            setIsScrollable(el.scrollHeight > el.clientHeight);
-            checkIfAtBottom();
-        };
         
         checkScrollable();
+        checkIfAtBottomOrTop();
 
-        el.addEventListener("scroll", checkIfAtBottom);
-        return () => removeEventListener("scroll", checkIfAtBottom);
+        el.addEventListener("scroll", checkIfAtBottomOrTop);
+        return () => removeEventListener("scroll", checkIfAtBottomOrTop);
     }, [data.songs]);
 
     return (
@@ -43,8 +52,15 @@ const AlbumCard = ({ title, data, counts }) => {
                         ))}
                     </ul>
 
-                    {isScrollable && !isAtBottom && (
-                        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-zinc-500 to-transparent"></div>
+                    {isScrollable && (
+                        <>
+                            {!isAtBottom && (
+                                <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-zinc-500 to-transparent"></div>
+                            )}
+                            {!isAtTop && (
+                                <div className="pointer-events-none absolute top-0 left-0 right-0 h-8 bg-gradient-to-t from-transparent to-zinc-500"></div>
+                            )}
+                        </>
                     )}
                 </div>
                 
