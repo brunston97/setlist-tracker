@@ -39,7 +39,7 @@ app.post('/api/getSetlistsByIds', async (req, res) => {
 
                 const songs = getSongsFromApiResponse(response);
                 for (const song of songs) {
-                    const key = song.toUpperCase();
+                    const key = normalizeSongTitle(song);
                     counts[key] = (counts[key] || 0) + 1;
                 }
             } catch (err) {
@@ -53,6 +53,14 @@ app.post('/api/getSetlistsByIds', async (req, res) => {
     await Promise.all(limitedFetches);
     res.json(counts);
 });
+
+function normalizeSongTitle(title) {
+return title
+    .toUpperCase()
+    .replace(/[^\w\s]|_/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 

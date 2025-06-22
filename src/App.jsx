@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import discographyData from './discography.json'
 import AlbumCard from './AlbumCard'
+import { NormalizeSongTitle } from './utils/stringExtensions'
 import './App.css'
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -16,7 +17,8 @@ function App() {
     const initialCounts = {};
     for (const album of Object.values(discographyData)) {
       for (const song of album.songs) {
-        initialCounts[song.toUpperCase()] = 0;
+        const key = NormalizeSongTitle(song);
+        initialCounts[key] = 0;
       }
     }
     

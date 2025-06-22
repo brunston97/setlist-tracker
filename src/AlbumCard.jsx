@@ -1,5 +1,6 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/react'
 import { useEffect, useRef, useState } from 'react'
+import { NormalizeSongTitle } from './utils/stringExtensions';
 
 const AlbumCard = ({ title, data, counts }) => {
 
@@ -45,7 +46,7 @@ const AlbumCard = ({ title, data, counts }) => {
                 <div className="relative">
                     <ul ref={listRef} className="max-h-[25rem] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-gray-600 scrollbar-track-transparent">
                         {data.songs?.map((song) => {
-                            const key = song.toUpperCase();
+                            const key = NormalizeSongTitle(song);
                             const hasSeenSong = counts[key] > 0;
                             return (
                                 <li key={song} className={`flex justify-between items-start gap-2 py-1 ${hasSeenSong ? 'text-green-400' : 'text-white'}`}>
