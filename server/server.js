@@ -41,12 +41,16 @@ app.post('/api/getSetlistsByIds', async (req, res) => {
             } catch (err) {
                 console.error(`Error getting ${id}: `, err.message);
             }
+
+            await delay(500);
         })
     );
     
     await Promise.all(limitedFetches);
     res.json(counts);
 });
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Node.js server listening on port ${PORT}`));
