@@ -44,12 +44,15 @@ const AlbumCard = ({ title, data, counts }) => {
                 <img src={data.cover} className="mb-4"></img>
                 <div className="relative">
                     <ul ref={listRef} className="max-h-[25rem] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-gray-600 scrollbar-track-transparent">
-                        {data.songs?.map((song) => (
-                            <li key={song} className="flex justify-between items-start gap-2 py-1 text-white">
-                                <span className="flex-1 break-words text-left">{song}</span>
-                                <span className="flex-shrink-0 text-right">{counts[song] ?? 0}</span>
-                            </li>
-                        ))}
+                        {data.songs?.map((song) => {
+                            const hasSeenSong = counts[song] > 0;
+                            return (
+                                <li key={song} className={`flex justify-between items-start gap-2 py-1 ${hasSeenSong ? 'text-green-400' : 'text-white'}`}>
+                                    <span className="flex-1 break-words text-left">{song}</span>
+                                    <span className="flex-shrink-0 text-right">{counts[song] ?? 0}</span>
+                                </li>
+                            )
+                        })}
                     </ul>
 
                     {isScrollable && (
