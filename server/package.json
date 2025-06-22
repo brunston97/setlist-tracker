@@ -15,7 +15,8 @@
     "axios": "^1.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "p-limit": "^6.2.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.3"
