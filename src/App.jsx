@@ -37,7 +37,11 @@ function App() {
       const response = await axios.post(`${apiUrl}/api/getSetlistsByIds`, { setlistIds });
       setCounts(response.data)
     } catch (error) {
-      console.log(error);
+      if (error.response?.status === 429) {
+        alert(error.response.data?.error || "Rate limit exceeded");
+      } else {
+        console.log(error);
+      }
     }
   }
 

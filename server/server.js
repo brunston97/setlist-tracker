@@ -3,6 +3,7 @@ import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import pLimit from 'p-limit';
+import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
@@ -21,7 +22,15 @@ function getSongsFromApiResponse(response) {
     return songNames;
 }
 
-app.post('/api/getSetlistsByIds', async (req, res) => {
+const setListLimiter = rateLimit({
+    windowMs: 6000,
+    max: 6,
+    message: { error: "Too many recent attempts. Please try again in one minute..." },
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+app.post('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
     const { setlistIds } = req.body;
     const counts = {};
 
@@ -46,7 +55,8 @@ app.post('/api/getSetlistsByIds', async (req, res) => {
                 console.error(`Error getting ${id}: `, err.message);
             }
 
-            await delay(600);
+            const delayAmount = requestCount < 3 ? 1001 : 550;
+            await delay(delayAmount);
         })
     );
     
