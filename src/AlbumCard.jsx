@@ -20,11 +20,11 @@ const AlbumCard = ({ title, data, counts }) => {
         const checkIfAtBottomOrTop = () => {
             checkIfAtTop();
             checkIfAtBottom();
-        }
+        };
 
         const checkIfAtTop = () => {
             setIsAtTop(el.scrollTop === 0);
-        }
+        };
         const checkIfAtBottom = () => {
             setIsAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 1);
         };

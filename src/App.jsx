@@ -10,22 +10,42 @@ const apiUrl = import.meta.env.VITE_API_URL;
 function App() {
   const [inputValue, setInputValue] = useState('');
   const [counts, setCounts] = useState({});
+  const [pageHasLoaded, setPageHasLoaded] = useState(false);
 
   useEffect(() => {
     console.log("Loaded album data:", discographyData);
+    let initialCounts = {};
 
-    const initialCounts = {};
-    for (const album of Object.values(discographyData)) {
-      for (const song of album.songs) {
-        const key = NormalizeSongTitle(song);
-        initialCounts[key] = 0;
+    const savedCounts = localStorage.getItem("counts");
+    if (savedCounts) {
+      initialCounts = JSON.parse(savedCounts);
+    } else {
+      for (const album of Object.values(discographyData)) {
+        for (const song of album.songs) {
+          const key = NormalizeSongTitle(song);
+          initialCounts[key] = 0;
+        }
       }
+    }
+
+    const savedSetlistLinks = localStorage.getItem("savedSetlists");
+    if (savedSetlistLinks) {
+      setInputValue(JSON.parse(savedSetlistLinks));
     }
     
     setCounts(initialCounts);
+    setPageHasLoaded(true);
   }, []);
 
+  useEffect(() => {
+    if (pageHasLoaded) {
+      localStorage.setItem("counts", JSON.stringify(counts));
+    }
+  }, [counts, pageHasLoaded]);
+
   async function handleButtonClick() {
+    localStorage.setItem("savedSetlists", JSON.stringify(inputValue));
+    
     const urls = inputValue
       .split('\n')
       .map(line => line.trim())
