@@ -80,7 +80,7 @@ function App() {
   }
 
   return (
-    <div style={{ padding: '0.5rem', fontFamily: 'sans-serif' }}>
+    <div style={{ padding: '0.25rem', fontFamily: 'sans-serif' }}>
       <div className="mb-6 flex flex-col items-center">
         <label htmlFor="setlistInput" className="block text-2xl font-medium mb-4">
           Paste Setlist.fm links here:
@@ -90,7 +90,7 @@ function App() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="One link per line..."
-          className="w-full h-32 p-3 border rounded-lg resize-y mb-4"
+          className="w-full h-32 p-2 border rounded-lg resize-y mb-4"
           style={{ maxWidth: '1280px' }}
         />
         <button 
