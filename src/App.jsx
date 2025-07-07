@@ -80,7 +80,7 @@ function App() {
   }
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+    <div style={{ padding: '0.5rem', fontFamily: 'sans-serif' }}>
       <div className="mb-6 flex flex-col items-center">
         <label htmlFor="setlistInput" className="block text-2xl font-medium mb-4">
           Paste Setlist.fm links here:
@@ -100,7 +100,7 @@ function App() {
           Load Setlists
         </button>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 gap-6 p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 gap-5 p-1">
         {Object.entries(discographyData).map(([albumName, album]) => (
           <AlbumCard 
             key={albumName}
