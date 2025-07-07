@@ -65,6 +65,7 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
     res.json(counts);
 });
 
+
 function normalizeSongTitle(title) {
 return title
     .toUpperCase()
@@ -75,5 +76,4 @@ return title
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Node.js server listening on port ${PORT}`));
+export default app;

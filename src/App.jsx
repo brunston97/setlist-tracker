@@ -11,6 +11,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const [counts, setCounts] = useState({});
   const [pageHasLoaded, setPageHasLoaded] = useState(false);
+  const [isMakingApiCall, setIsMakingApiCall] = useState(false);
 
   useEffect(() => {
     console.log("Loaded album data:", discographyData);
@@ -54,7 +55,8 @@ function App() {
     const setlistIds = getSetlistIdsFromUrls(urls);
     
     try {
-      const response = await axios.post(`${apiUrl}/api/getSetlistsByIds`, { setlistIds });
+      setIsMakingApiCall(true);
+      const response = await axios.get(`${apiUrl}/api/getSetlistsByIds?ids=${setlistIds.join(',')}`);
       setCounts(response.data)
     } catch (error) {
       if (error.response?.status === 429) {
@@ -63,6 +65,8 @@ function App() {
         console.log(error);
       }
     }
+
+    setIsMakingApiCall(false);
   }
 
   function getSetlistIdsFromUrls(urls) {
@@ -100,7 +104,7 @@ function App() {
           Load Setlists
         </button>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 gap-5 p-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-5 p-1">
         {Object.entries(discographyData).map(([albumName, album]) => (
           <AlbumCard 
             key={albumName}
@@ -110,6 +114,11 @@ function App() {
           />
         ))}
       </div>
+      {isMakingApiCall && (
+        <div className="loading-overlay">
+            <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
     </div>
   );
 }
