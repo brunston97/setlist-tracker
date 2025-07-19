@@ -37,7 +37,7 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
 
     let requestCount = 1;
 
-    const limit = pLimit(1);
+    const limit = pLimit(8);
 
     const limitedFetches = setlistIdsSplit.map(id => 
         limit(async () => {
@@ -56,7 +56,7 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
                 console.error(`Error getting ${id}: `, err.message);
             }
 
-            const delayAmount = requestCount < 3 ? 1001 : 550;
+            const delayAmount = 500;
             await delay(delayAmount);
         })
     );
