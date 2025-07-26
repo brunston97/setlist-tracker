@@ -108,7 +108,7 @@ function App() {
           style={{ maxWidth: '1280px' }}
         />
         <label htmlFor="setlistInput" className="block text-2xl font-medium mb-4">
-          ...or input your Setlist.fm username!
+          ...or enter your Setlist.fm username!
         </label>
         <input
           id="usernameInput"
