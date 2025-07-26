@@ -115,7 +115,7 @@ function App() {
           value={usernameInputValue}
           onChange={(e) => setUsernameInputValue(e.target.value)}
           placeholder="Enter username here..."
-          className="w-1/2 p-2 border text-center rounded-lg mb-4"
+          className="w-3/4 sm:w-1/2 p-2 border text-center rounded-lg mb-4"
         />
         <button 
           onClick={() => handleButtonClick()} 

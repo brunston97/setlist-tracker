@@ -11,24 +11,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-function getSongsFromApiResponse(response) {
-    const songs = response.sets.set[0].song;
+function getSongsFromSetlist(setlist) {
     const songNames = [];
-    
-    for (const song of songs) {
-        songNames.push(song.name.trim());
+
+    if (setlist.artist.name.toUpperCase() === "KING GIZZARD & THE LIZARD WIZARD") {
+        if (setlist.sets.set.length > 0) {
+            for (const set of setlist.sets.set) {
+                for (const song of set.song) {
+                    if (song) {
+                        songNames.push(song.name.trim());
+                    }
+                }
+            }
+        }
     }
 
     return songNames;
 }
 
-function getSongsFromUsernameApiResponse(response) {
+function getSongsFromUsername(response) {
     const songNames = [];
 
     for (const setlist of response.setlist) {
-        for (const song of setlist.sets.set[0].song) {
-            songNames.push(song.name.trim());
-        }
+        songNames.push(...getSongsFromSetlist(setlist));
     }
 
     return songNames;
@@ -59,7 +64,7 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
                     headers: { 'x-api-key': process.env.SETLIST_API_KEY, 'Accept': 'application/json' }
                 });
 
-                const songs = getSongsFromApiResponse(response);
+                const songs = getSongsFromSetlist(response);
                 for (const song of songs) {
                     const key = normalizeSongTitle(song);
                     counts[key] = (counts[key] || 0) + 1;
@@ -86,7 +91,7 @@ app.get('/api/getSetlistsByUsername', async (req, res) => {
             headers: { 'x-api-key': process.env.SETLIST_API_KEY, 'Accept': 'application/json' }
         });
 
-        const songs = getSongsFromUsernameApiResponse(response);
+        const songs = getSongsFromUsername(response);
         for (const song of songs) {
             const key = normalizeSongTitle(song);
             counts[key] = (counts[key] || 0) + 1;
