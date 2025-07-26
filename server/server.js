@@ -22,6 +22,18 @@ function getSongsFromApiResponse(response) {
     return songNames;
 }
 
+function getSongsFromUsernameApiResponse(response) {
+    const songNames = [];
+
+    for (const setlist of response.setlist) {
+        for (const song of setlist.sets.set[0].song) {
+            songNames.push(song.name.trim());
+        }
+    }
+
+    return songNames;
+}
+
 const setListLimiter = rateLimit({
     windowMs: 6000,
     max: 6,
@@ -62,6 +74,28 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
     );
     
     await Promise.all(limitedFetches);
+    res.json(counts);
+});
+
+app.get('/api/getSetlistsByUsername', async (req, res) => {
+    const userName = req.query.userName;
+    const counts = {};
+
+    try {
+        const { data: response } = await axios.get(`https://api.setlist.fm/rest/1.0/user/${userName}/attended`, {
+            headers: { 'x-api-key': process.env.SETLIST_API_KEY, 'Accept': 'application/json' }
+        });
+
+        const songs = getSongsFromUsernameApiResponse(response);
+        for (const song of songs) {
+            const key = normalizeSongTitle(song);
+            counts[key] = (counts[key] || 0) + 1;
+        }
+    } catch (err) {
+        console.error(`Error getting ${userName}: `, err.message);
+        throw err;
+    }
+
     res.json(counts);
 });
 

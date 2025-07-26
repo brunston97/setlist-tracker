@@ -8,7 +8,8 @@ import './App.css'
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function App() {
-  const [inputValue, setInputValue] = useState('');
+  const [setlistInputValue, setInputValue] = useState('');
+  const [usernameInputValue, setUsernameInputValue] = useState('')
   const [counts, setCounts] = useState({});
   const [pageHasLoaded, setPageHasLoaded] = useState(false);
   const [isMakingApiCall, setIsMakingApiCall] = useState(false);
@@ -33,6 +34,11 @@ function App() {
     if (savedSetlistLinks) {
       setInputValue(JSON.parse(savedSetlistLinks));
     }
+
+    const savedUsername = localStorage.getItem("savedUsername");
+    if (savedUsername) {
+      setUsernameInputValue(savedUsername);
+    }
     
     setCounts(initialCounts);
     setPageHasLoaded(true);
@@ -45,9 +51,10 @@ function App() {
   }, [counts, pageHasLoaded]);
 
   async function handleButtonClick() {
-    localStorage.setItem("savedSetlists", JSON.stringify(inputValue));
+    localStorage.setItem("savedSetlists", JSON.stringify(setlistInputValue));
+    localStorage.setItem("savedUsername", usernameInputValue)
     
-    const urls = inputValue
+    const urls = setlistInputValue
       .split('\n')
       .map(line => line.trim())
       .filter(line => line.includes('setlist.fm'));
@@ -56,11 +63,14 @@ function App() {
     
     try {
       setIsMakingApiCall(true);
-      const response = await axios.get(`${apiUrl}/api/getSetlistsByIds?ids=${setlistIds.join(',')}`);
+      const response = usernameInputValue ? await axios.get(`${apiUrl}/api/getSetlistsByUsername?userName=${usernameInputValue}`) : await axios.get(`${apiUrl}/api/getSetlistsByIds?ids=${setlistIds.join(',')}`);
       setCounts(response.data)
     } catch (error) {
       if (error.response?.status === 429) {
         alert(error.response.data?.error || "Rate limit exceeded");
+      } else if (error.response?.status === 404) {
+        console.log(JSON.stringify(error));
+        alert(`Error: could not find username ${usernameInputValue}`);
       } else {
         console.log(error);
       }
@@ -91,11 +101,21 @@ function App() {
         </label>
         <textarea
           id="setlistInput"
-          value={inputValue}
+          value={setlistInputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="One link per line..."
           className="w-full h-32 p-2 border rounded-lg resize-y mb-4"
           style={{ maxWidth: '1280px' }}
+        />
+        <label htmlFor="setlistInput" className="block text-2xl font-medium mb-4">
+          ...or input your Setlist.fm username!
+        </label>
+        <input
+          id="usernameInput"
+          value={usernameInputValue}
+          onChange={(e) => setUsernameInputValue(e.target.value)}
+          placeholder="Enter username here..."
+          className="w-1/2 p-2 border text-center rounded-lg mb-4"
         />
         <button 
           onClick={() => handleButtonClick()} 
