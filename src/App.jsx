@@ -15,7 +15,6 @@ function App() {
   const [isMakingApiCall, setIsMakingApiCall] = useState(false);
 
   useEffect(() => {
-    console.log("Loaded album data:", discographyData);
     let initialCounts = {};
 
     const savedCounts = localStorage.getItem("counts");

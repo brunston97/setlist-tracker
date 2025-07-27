@@ -82,25 +82,40 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
     res.json(counts);
 });
 
-app.get('/api/getSetlistsByUsername', async (req, res) => {
+app.get('/api/getSetlistsByUsername', async (req, res) =>  {
     const userName = req.query.userName;
     const counts = {};
 
-    try {
-        const { data: response } = await axios.get(`https://api.setlist.fm/rest/1.0/user/${userName}/attended`, {
-            headers: { 'x-api-key': process.env.SETLIST_API_KEY, 'Accept': 'application/json' }
-        });
+    let reachedLastPage = false;
+    let pageCount = 0;
+    let numResultsProcessed = 0;
+    let totalNumResults= 0;
 
-        const songs = getSongsFromUsername(response);
-        for (const song of songs) {
-            const key = normalizeSongTitle(song);
-            counts[key] = (counts[key] || 0) + 1;
+    while (!reachedLastPage) {
+        try {
+            const { data: response } = await axios.get(`https://api.setlist.fm/rest/1.0/user/${userName}/attended?p=${++pageCount}`, {
+                headers: { 'x-api-key': process.env.SETLIST_API_KEY, 'Accept': 'application/json' }
+            });
+
+            console.log(`Queried page ${pageCount}`);
+            if (pageCount == 1)
+                totalNumResults = response.total;
+
+            const songs = getSongsFromUsername(response);
+            for (const song of songs) {
+                const key = normalizeSongTitle(song);
+                counts[key] = (counts[key] || 0) + 1;
+            }
+            
+            numResultsProcessed += response.setlist.length;
+            if (numResultsProcessed >= totalNumResults)
+                reachedLastPage = true;
+        } catch (err) {
+            console.error(`Error getting ${userName}: `, err.message);
+            throw err;
         }
-    } catch (err) {
-        console.error(`Error getting ${userName}: `, err.message);
-        throw err;
     }
-
+    
     res.json(counts);
 });
 
