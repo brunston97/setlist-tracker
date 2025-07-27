@@ -86,6 +86,8 @@ app.get('/api/getSetlistsByUsername', async (req, res) =>  {
     const userName = req.query.userName;
     const counts = {};
 
+    const maxPageCount = 20;
+
     let reachedLastPage = false;
     let pageCount = 0;
     let numResultsProcessed = 0;
@@ -108,8 +110,12 @@ app.get('/api/getSetlistsByUsername', async (req, res) =>  {
             }
             
             numResultsProcessed += response.setlist.length;
-            if (numResultsProcessed >= totalNumResults)
+            if (numResultsProcessed >= totalNumResults) {
                 reachedLastPage = true;
+            } else if (pageCount >= maxPageCount) {
+                reachedLastPage = true;
+            }
+                
         } catch (err) {
             console.error(`Error getting ${userName}: `, err.message);
             throw err;
