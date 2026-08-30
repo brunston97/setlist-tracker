@@ -10,14 +10,18 @@ const apiUrl = import.meta.env.VITE_API_URL;
 function App() {
   const [setlistInputValue, setInputValue] = useState('');
   const [usernameInputValue, setUsernameInputValue] = useState('')
-  const [counts, setCounts] = useState({});
+
+  const [songs, setSongs] = useState({});
+  const [shows, setShows] = useState({});
+
   const [pageHasLoaded, setPageHasLoaded] = useState(false);
   const [isMakingApiCall, setIsMakingApiCall] = useState(false);
 
   useEffect(() => {
     let initialCounts = {};
+    let initialShows = {};
 
-    const savedCounts = localStorage.getItem("counts");
+    const savedCounts = localStorage.getItem("songs");
     if (savedCounts) {
       initialCounts = JSON.parse(savedCounts);
     } else {
@@ -27,6 +31,11 @@ function App() {
           initialCounts[key] = 0;
         }
       }
+    }
+
+    const savedShows = localStorage.getItem("shows");
+    if (savedShows) {
+      initialShows = JSON.parse(savedShows);
     }
 
     const savedSetlistLinks = localStorage.getItem("savedSetlists");
@@ -39,15 +48,17 @@ function App() {
       setUsernameInputValue(savedUsername);
     }
     
-    setCounts(initialCounts);
+    setSongs(initialCounts);
+    setShows(initialShows);
     setPageHasLoaded(true);
   }, []);
 
   useEffect(() => {
     if (pageHasLoaded) {
-      localStorage.setItem("counts", JSON.stringify(counts));
+      localStorage.setItem("songs", JSON.stringify(songs));
+      localStorage.setItem("shows", JSON.stringify(shows));
     }
-  }, [counts, pageHasLoaded]);
+  }, [songs, shows, pageHasLoaded]);
 
   async function handleButtonClick() {
     localStorage.setItem("savedSetlists", JSON.stringify(setlistInputValue));
@@ -62,8 +73,13 @@ function App() {
     
     try {
       setIsMakingApiCall(true);
-      const response = usernameInputValue ? await axios.get(`${apiUrl}/api/getSetlistsByUsername?userName=${usernameInputValue}`) : await axios.get(`${apiUrl}/api/getSetlistsByIds?ids=${setlistIds.join(',')}`);
-      setCounts(response.data)
+
+      const response = usernameInputValue 
+          ? await axios.get(`${apiUrl}/api/getSetlistsByUsername?userName=${usernameInputValue}`) 
+          : await axios.get(`${apiUrl}/api/getSetlistsByIds?ids=${setlistIds.join(',')}`);
+
+      setSongs(response.data.songs)
+      setShows(response.data.shows)
     } catch (error) {
       if (error.response?.status === 429) {
         alert(error.response.data?.error || "Rate limit exceeded");
@@ -128,8 +144,9 @@ function App() {
           <AlbumCard 
             key={albumName}
             title={albumName}
-            data={album}
-            counts={counts}
+            albumData={album}
+            songs={songs}
+            shows={shows}
           />
         ))}
       </div>

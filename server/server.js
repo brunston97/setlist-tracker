@@ -11,11 +11,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-function getSongsFromSetlist(setlist) {
+
+function convertToSimpleSetlist(setlist) {
     const songNames = [];
+    let venue = null;
+    let date = null;
+    let city = null;
+    let state = null; 
+    let country = null;
+    let id = null;
 
     if (setlist.artist.name.toUpperCase() === "KING GIZZARD & THE LIZARD WIZARD") {
         if (setlist.sets.set.length > 0) {
+            venue = setlist.venue.name;
+            date = setlist.eventDate;
+            city = setlist.venue.city.name;
+            state = setlist.venue.city.stateCode;
+            country = setlist.venue.city.country.code;
+            id = setlist.id;
+
             for (const set of setlist.sets.set) {
                 for (const song of set.song) {
                     if (song) {
@@ -26,17 +40,60 @@ function getSongsFromSetlist(setlist) {
         }
     }
 
-    return songNames;
+    const simpleSetlist = {
+        venue: venue,
+        date: date,
+        city: city,
+        state: state,
+        country: country,
+        id: id,
+        songs: songNames
+    }
+
+    return simpleSetlist;
 }
 
-function getSongsFromUsername(response) {
+function getSimpleSetlistsFromUsername(response) {
     const songNames = [];
 
     for (const setlist of response.setlist) {
-        songNames.push(...getSongsFromSetlist(setlist));
+        songNames.push(convertToSimpleSetlist(setlist));
     }
 
     return songNames;
+}
+
+function createSongMap(simpleSetlists) {
+    const songs = {};
+    const shows = {};
+
+    for (const simpleSetlist of simpleSetlists) {
+        const showId = simpleSetlist.id;
+
+        shows[showId] = {
+            date: simpleSetlist.date,
+            venue: simpleSetlist.venue,
+            city: simpleSetlist.city,
+            state: simpleSetlist.state,
+            country: simpleSetlist.country
+        };
+
+        for (const song of simpleSetlist.songs) {
+            const key = normalizeSongTitle(song);
+
+            if (songs[key]) {
+                songs[key].shows.push(showId);
+                songs[key].count++;
+            } else {
+                songs[key] = {
+                    shows: [showId],
+                    count: 1
+                }
+            }
+        }
+    }
+
+    return { songs, shows };
 }
 
 const setListLimiter = rateLimit({
@@ -50,7 +107,7 @@ const setListLimiter = rateLimit({
 app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
     const setlistIds = req.query.ids;
     const setlistIdsSplit = setlistIds.split(',');
-    const counts = {};
+    let songMap = {};
 
     let requestCount = 1;
 
@@ -64,11 +121,8 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
                     headers: { 'x-api-key': process.env.SETLIST_API_KEY, 'Accept': 'application/json' }
                 });
 
-                const songs = getSongsFromSetlist(response);
-                for (const song of songs) {
-                    const key = normalizeSongTitle(song);
-                    counts[key] = (counts[key] || 0) + 1;
-                }
+                const simpleSetlists = [convertToSimpleSetlist(response)]; 
+                songMap = createSongMap(simpleSetlists);
             } catch (err) {
                 console.error(`Error getting ${id}: `, err.message);
             }
@@ -79,12 +133,12 @@ app.get('/api/getSetlistsByIds', setListLimiter, async (req, res) => {
     );
     
     await Promise.all(limitedFetches);
-    res.json(counts);
+    res.json(songMap);
 });
 
 app.get('/api/getSetlistsByUsername', async (req, res) =>  {
     const userName = req.query.userName;
-    const counts = {};
+    let songMap = {};
 
     const maxPageCount = 20;
 
@@ -103,12 +157,8 @@ app.get('/api/getSetlistsByUsername', async (req, res) =>  {
             if (pageCount == 1)
                 totalNumResults = response.total;
 
-            const songs = getSongsFromUsername(response);
-            for (const song of songs) {
-                const key = normalizeSongTitle(song);
-                counts[key] = (counts[key] || 0) + 1;
-            }
-            
+            const simpleSetlists = getSimpleSetlistsFromUsername(response);
+            songMap = createSongMap(simpleSetlists);
             numResultsProcessed += response.setlist.length;
             if (numResultsProcessed >= totalNumResults) {
                 reachedLastPage = true;
@@ -117,12 +167,12 @@ app.get('/api/getSetlistsByUsername', async (req, res) =>  {
             }
                 
         } catch (err) {
-            console.error(`Error getting ${userName}: `, err.message);
+            console.log(`Error getting ${userName}: `, err.message);
             throw err;
         }
     }
     
-    res.json(counts);
+    res.json(songMap);
 });
 
 function normalizeSongTitle(title) {

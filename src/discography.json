@@ -1,4 +1,34 @@
 {
+    "Alien Metal": {
+        "cover": "./am.jpg",
+        "year": 2026,
+        "songs": [
+            "Sapience",
+            "Alien Metal",
+            "Superheavy, Supercritical",
+            "Kill For The Steel",
+            "Level 5",
+            "Rapid Alpha Decay",
+            "Uqt",
+            "Atomic Collapse"
+        ]
+    },
+    "Phantom Island": {
+        "cover": "./pi.jpg",
+        "year": 2025,
+        "songs": [
+            "Phantom Island",
+            "Deadstick",
+            "Lonely Cosmos",
+            "Eternal Return",
+            "Panpsych",
+            "Spacesick",
+            "Aerodynamic",
+            "Sea of Doubt",
+            "Silent Spirit",
+            "Grow Wings and Fly"
+        ]
+    },
     "Flight b741": {
         "cover": "./fb741.jpg",
         "year": 2024,
